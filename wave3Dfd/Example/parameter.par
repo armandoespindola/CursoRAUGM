@@ -1,0 +1,47 @@
+// MODEL DIMENSIONS
+-xi 0.0
+-xf 11100.0
+-yi 0.0
+-yf 11100.0
+-zi 0.0
+-zf 11100.0
+// NUMBER OF NODES IN EVERY DIRECTION
+-nx 112
+-ny 112
+-nz 112
+// SIMULATION TIME [s]
+-t 10.0
+// TIME STEP
+-dt 0.01000
+// SOURCE FREQUENCY
+-f0 3.0
+// SOURCE TYPE
+-stype 2
+// SOURCE FILE
+-srcFile 0
+// NUMBER OF SUBDOMAINS
+-sx 2
+-sy 2
+-sz 2
+// NUMBER OMP THREADS
+-nomp 1
+// SNAPSHOT
+-snap 0
+-t_snap 100
+// NUMBER OF SOURCES
+-ns 1
+-sf sources.par
+// NUMBER OF RECEPTORS
+-nr 8
+-rf receptors.par
+// MODEL DATA FILES
+-VP_F VP.bin
+-VS_F VS.bin
+-RHO_F RHO.bin
+// ADJOINT
+-snapR 0
+-t_snapR 50
+-adj 0
+// FREQUENCIES
+-nfq 0
+-rfq frequency.par
