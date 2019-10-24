@@ -2,7 +2,7 @@ import numpy as np
 import os
 from inversion.Tools.UtilFunc import butter_bandpass_filter,PlotNorm,butter_lowpass_filter,bin2sac,CloneBin2Sac
 import math
-from inversion.Windows.windows import windows
+#from inversion.Windows.windows import windows
 from scipy import signal
 import time
 import obspy
