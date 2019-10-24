@@ -1,0 +1,23 @@
+#!/bin/sh
+# Program Rename Files -> OBS
+
+#Find Event Folders
+folder=($(ls -l | grep shot | awk '{print $9}'));
+main_fold=$(pwd)
+
+for ifold in ${folder[@]}
+do
+    cd ${ifold}/DATA
+    #rm *-OBS.bin
+    rm *-ADJ*.bin
+    rm *.bin.M0
+    stat=($(ls -l X*.bin | awk '{print $9}' | awk -F. '{print $1}'))
+    for istat in ${stat[@]}
+    do
+	echo ${ifold} ${istat}:
+
+	#cp ${istat}.bin ${istat}.bin.M0
+    done
+    cd $main_fold
+    
+done

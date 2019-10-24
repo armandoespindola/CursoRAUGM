@@ -1,0 +1,233 @@
+import numpy as np
+import os
+import shutil
+from scipy import signal
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import subprocess
+
+from inversion.Tools.UtilFunc import Simshow
+
+class ProcKernel:
+    def __init__(self,par):
+        self.par = par
+        self.cx = np.arange(0,self.par.nodx) * self.par.dx
+        self.cy = np.arange(0,self.par.nody) * self.par.dy
+        self.cz = np.arange(self.par.nodz-1,-1,-1) * self.par.dz
+        mnew = np.fromfile(self.par.FoldIter +"/m-new.bin",dtype='f4')
+        nstride = self.par.nodx * self.par.nody * self.par.nodz
+
+        self.rho0 = mnew[0:nstride]
+        self.vp0 = mnew[nstride:2 * nstride]
+        self.vs0 = mnew[2 * nstride:3 * nstride]
+        self.max_g = 1.0
+        
+        
+    def SumKernel(self,sufix,iter):
+        os.chdir(self.par.InvPar["-WorkDir"]);
+        Kr = np.zeros(int(self.par.ModPar["-nx"]) * int(self.par.ModPar["-ny"]) * int(self.par.ModPar["-nz"]))
+        Kvp = np.zeros(int(self.par.ModPar["-nx"]) * int(self.par.ModPar["-ny"]) * int(self.par.ModPar["-nz"]))
+        Kvs = np.zeros(int(self.par.ModPar["-nx"]) * int(self.par.ModPar["-ny"]) * int(self.par.ModPar["-nz"]))         
+        
+        for i in range(0,self.par.EventNum):
+            os.chdir(self.par.EventName[i] + "/DATA")
+            Kr = Kr + np.fromfile("KRHO.bin",dtype='f4')
+            #subprocess.call("rm -f KRHO.bin",shell=True)
+            Kvp = Kvp + np.fromfile("KVP.bin",dtype='f4')
+            #subprocess.call("rm -f KVP.bin",shell=True)
+            Kvs = Kvs + np.fromfile("KVS.bin",dtype='f4')
+            #subprocess.call("rm -f KVS.bin",shell=True)
+            os.chdir(self.par.WorkDir)
+        
+        os.chdir("IterInversion")
+        Kr.astype('f4').tofile("Kr"+sufix+".bin")
+        Kvp.astype('f4').tofile("Kvp"+sufix+".bin")
+        Kvs.astype('f4').tofile("Kvs"+sufix+".bin")
+        os.chdir(self.par.InvPar["-WorkDir"])
+
+        K = np.zeros(int(self.par.ModPar["-nx"]) * int(self.par.ModPar["-ny"]) * int(self.par.ModPar["-nz"]))
+        os.chdir(self.par.InvPar["-WorkDir"])
+            
+        for i in range(0,self.par.EventNum):
+            os.chdir(self.par.EventName[i] + "/DATA")
+            K = K + np.abs(np.fromfile("PcondA.bin",dtype='f4')) #+ np.fromfile("PcondB.bin",dtype='f4')
+            #K = self.TaperSourRec(np.fromfile("PcondB.bin",dtype='f4'))
+            #subprocess.call("rm -f PcondA.bin",shell=True)
+            #subprocess.call("rm -f PcondB.bin",shell=True)
+            os.chdir("../../")
+
+        os.chdir("IterInversion")
+        K.astype('f4').tofile("PcondA"+sufix+".bin")
+        os.chdir(self.par.InvPar["-WorkDir"])
+        
+        
+    def Ksmoth(self,iter,sufix,nsmooth=1):
+        freq = self.par.freq[-1]  
+        os.chdir(self.par.InvPar["-WorkDir"])
+
+
+        # rho = self.rho0
+        vp = self.vp0
+        vs = self.vs0
+        
+        # Width Gaussian Function
+        minvs = np.min(vs)
+        #print "#####",minvs
+        minlength = minvs / (2.0 * freq)
+
+        minlength1 = minvs / (2.0 * self.par.freq[0])
+
+        D1 = KernelSmoothing(minlength,self.par.dx,self.par.dy)
+        D2 = KernelSmoothing(minlength1,self.par.dx,self.par.dy)
+
+        #print minlength, self.par.f0
+        
+        #Reading Kernels
+        os.chdir("IterInversion")
+
+
+        ## SCALING GRADIENT FOLLOWING Blom(2017)
+        buffk =np.fromfile("Kr"+sufix+".bin",dtype='f4')
+        buffk = dampingK(buffk,2.0)
+        
+        Kr = np.reshape(buffk,[self.par.nodz,self.par.nody,self.par.nodx])
+
+        ## SCALING GRADIENT FOLLOWING Blom(2017)
+        buffk = np.fromfile("Kvp"+sufix+".bin",dtype='f4')
+        buffk = dampingK(buffk,2.0) #* vp
+
+        Kvp = np.reshape(buffk,[self.par.nodz,self.par.nody,self.par.nodx])
+
+        ## SCALING GRADIENT FOLLOWING Blom(2017)
+        buffk = np.fromfile("Kvs"+sufix+".bin",dtype='f4')
+        buffk = dampingK(buffk,2.0) #* vs
+
+        Kvs = np.reshape(buffk,[self.par.nodz,self.par.nody,self.par.nodx])
+        
+        subprocess.call("rm -f Kr" +sufix+".bin",shell=True)
+        subprocess.call("rm -f Kvp" +sufix+".bin",shell=True)
+        subprocess.call("rm -f Kvs" +sufix+".bin",shell=True)
+
+
+        buffk = dampingK(np.fromfile("PcondA"+sufix+".bin",dtype='f4'),2.0)
+        P = np.reshape(buffk,[self.par.nodz,self.par.nody,self.par.nodx])
+
+        subprocess.call("rm -f PcondA"+sufix+".bin",shell=True)
+
+        
+        for i in range(0,nsmooth):
+             for k in range(0,self.par.nodz):
+                 Kr[k,:,:] = signal.fftconvolve(Kr[k,:,:],D1,mode='same')
+                 Kvp[k,:,:] = signal.fftconvolve(Kvp[k,:,:],D1,mode='same')
+                 Kvs[k,:,:] = signal.fftconvolve(Kvs[k,:,:],D1,mode='same')
+                 P[k,:,:] = signal.fftconvolve(P[k,:,:],D2,mode='same')
+             for k in range(0,self.par.nodx):
+                 Kr[:,:,k] = signal.fftconvolve(Kr[:,:,k],D1,mode='same')
+                 Kvp[:,:,k] = signal.fftconvolve(Kvp[:,:,k],D1,mode='same')
+                 Kvs[:,:,k] = signal.fftconvolve(Kvs[:,:,k],D1,mode='same')
+                 P[:,:,k] = signal.fftconvolve(P[:,:,k],D2,mode='same')
+             for k in range(0,self.par.nody):
+                 Kr[:,k,:] = signal.fftconvolve(Kr[:,k,:],D1,mode='same')
+                 Kvp[:,k,:] = signal.fftconvolve(Kvp[:,k,:],D1,mode='same')
+                 Kvs[:,k,:] = signal.fftconvolve(Kvs[:,k,:],D1,mode='same')
+                 P[:,k,:] = signal.fftconvolve(P[:,k,:],D2,mode='same')
+
+
+        #P *= (1.0 / np.max(P))
+
+        #print "max",np.max(P)
+
+        
+        # Kr = Kr / P   
+        # Kvp = Kvp / P 
+        # Kvs = Kvs / P
+
+        # if iter > 1 :
+        #     mold = np.fromfile(self.par.FoldIter +"/m-old.bin",dtype='f4')
+        #     mnew = np.fromfile(self.par.FoldIter +"/m-new.bin",dtype='f4')
+        #     fnew = np.loadtxt(self.par.FoldIter+'/f-new.txt')
+        #     alpha = fnew * (0.3/0.7) / (self.par.nodz * self.par.nody * self.par.nodx)
+        #     var = 1.0 / (0.05 * mold)**2
+        #     e_m = var * (mnew - mold) * alpha
+
+        # Kr.astype('f4').tofile("SKr.bin")
+        # Kvp.astype('f4').tofile("SKvp.bin")
+        # Kvs.astype('f4').tofile("SKvs.bin")
+        # P.astype('f4').tofile("PB.bin")
+        
+        
+        # Saving Files
+        g = np.concatenate((Kr.flatten(),Kvp.flatten(),Kvs.flatten()))
+        #g = np.concatenate((Kvp.flatten(),Kvs.flatten()))
+
+        # if iter > 1 :
+        #     g += e_m
+
+        g[0:self.par.nodz * self.par.nody * self.par.nodx] = 0.0
+            
+
+        self.max_g = np.max(np.abs(g))
+        
+        g.astype('f4').tofile("g-"+sufix+".bin")
+        sx = int(round(self.par.nodx/2)) 
+        sy = int(round(self.par.nody/2))
+        sz = int(round(self.par.nodz/2))
+        
+        plt.rc('font', size=5)
+        Simshow(Kr,self.cx,self.cy,self.cz,sx,sy,sz,'Smooth_Krho')
+        plt.savefig("Smth_Krho_it-"+str(iter)+".pdf",dpi=300,bbox_inches='tight')
+
+        plt.rc('font', size=5)
+        Simshow(Kvp,self.cx,self.cy,self.cz,sx,sy,sz,'Smooth_Kvp')
+        plt.savefig("Smth_Kvp_it-"+str(iter)+".pdf",dpi=300,bbox_inches='tight')
+
+        # plt.figure()
+        # plt.imshow(D1)
+        # plt.colorbar()
+        # plt.savefig("filter.pdf",dpi=300,bbox_inches='tight')
+
+
+        plt.rc('font', size=5)
+        Simshow(Kvs,self.cx,self.cy,self.cz,sx,sy,sz,'Smooth_Kvs')
+        plt.savefig("Smth_Kvs_it-"+str(iter)+".pdf",dpi=300,bbox_inches='tight')
+        os.chdir(self.par.InvPar["-WorkDir"])
+
+
+
+def dampingK(kx,nstd):
+
+    kx_mean = np.mean(kx)
+    kx_std = np.std(kx)
+
+    lwb = kx_mean - kx_std * nstd
+    upb = kx_mean + kx_std * nstd
+    
+    kx[kx<lwb] = 0.0 #np.abs(kx_mean) * kx[kx<lwb] / kx[kx<lwb]
+    kx[kx>upb] = 0.0
+
+    return kx
+
+
+
+def KernelSmoothing(minlength,dx,dy):
+    [xg, yg] = np.meshgrid(np.arange(0,2 * minlength + dx ,dx),
+                           np.arange(0,2 * minlength + dy ,dy))
+        
+    x0 = minlength
+    y0 = minlength
+    
+    #Gaussian Function Kernel Smoothing                
+    D1 = np.exp(-4.0 * ((xg-x0)**2.0+(yg-y0)**2.0)/(minlength**2.0))
+    D1 = D1 / np.max(D1)
+    NormD = np.trapz(np.trapz(D1,axis=0))    
+    D1 = D1 / NormD
+
+    return D1
+            
+
+
+
+
+
+

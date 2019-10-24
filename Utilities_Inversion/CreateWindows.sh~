@@ -1,0 +1,32 @@
+#!/bin/sh
+# Program creates fake windows(test inversion workflow)
+
+#Find Event Folders
+folder=($(ls -l | grep shot | awk '{print $9}'));
+main_fold=$(pwd)
+
+for ifold in ${folder[@]}
+do
+    cd ${ifold}/DATA
+    stat=($(ls -l *-VX.bin | awk '{print $9}' | awk -F- '{print $1}'))
+    for istat in ${stat[@]}
+    do
+	echo ${ifold} ${istat}:
+	printf "# NUM_WIN = 1\n" > WIN/${istat}-HHE.win.qual
+	printf " # i win_start win_end Tshift CC dlnA\n" >> WIN/${istat}-HHE.win.qual
+	printf "1   0.50000  5.00000    7.50000    0.87867   -0.12983\n" >> WIN/${istat}-HHE.win.qual
+	printf "2   5.00000  7.00000    7.50000    0.87867   -0.12983\n" >> WIN/${istat}-HHE.win.qual
+
+	printf "# NUM_WIN = 1\n" > WIN/${istat}-HHN.win.qual
+	printf " # i win_start win_end Tshift CC dlnA\n" >> WIN/${istat}-HHN.win.qual
+	printf "1   0.50000  5.000    7.50000    0.87867   -0.12983\n" >> WIN/${istat}-HHN.win.qual
+	printf "2   5.00000  6.00000    7.50000    0.87867   -0.12983\n" >> WIN/${istat}-HHN.win.qual
+
+	printf "# NUM_WIN = 1\n" > WIN/${istat}-HHZ.win.qual
+	printf " # i win_start win_end Tshift CC dlnA\n" >> WIN/${istat}-HHZ.win.qual
+	printf "1   0.50000  5.0000    7.50000    0.87867   -0.12983\n" >> WIN/${istat}-HHZ.win.qual
+	printf "2   5.00000  6.00000    7.50000    0.87867   -0.12983\n" >> WIN/${istat}-HHZ.win.qual
+    done
+    cd $main_fold
+    
+done

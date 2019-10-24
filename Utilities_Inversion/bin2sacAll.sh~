@@ -1,0 +1,20 @@
+#!/bin/sh
+# Performs conversion bin to sac with python program bin2sac.py
+
+#Find Event Folders
+folder=($(ls -l | grep shot | awk '{print $9}'));
+main_fold=$(pwd)
+
+delta=0.01
+t0=0.0
+path=Utilities_Inversion
+
+for ifold in ${folder[@]}
+do
+    cd ${ifold}/DATA
+    echo ${ifold}:
+    rm *.SAC
+    rm *.qual
+    python ../../${path}/bin2sac.py $t0 $delta 1 1
+    cd $main_fold
+done

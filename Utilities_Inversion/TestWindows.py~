@@ -1,0 +1,77 @@
+import os,sys
+import subprocess
+sys.path.append('inversion')
+print os.getcwd()
+from Windows.windows import windows
+from Tools.parameter import param
+import obspy
+import pyflex
+import numpy as np
+import matplotlib.pyplot as plt
+import logging
+#logger = logging.getLogger("pyflex")
+#logger.setLevel(logging.DEBUG)
+
+
+
+def syn2sac(syn,obs):
+    syn_data = obs.copy()
+    syn_data[0].data = syn
+    return syn_data
+
+def CreateWin(obs,syn,win):
+    syn = syn2sac(syn,obs)
+    obs.detrend("linear")
+    obs.taper(max_percentage=0.05, type="hann")
+    obs.filter("bandpass", freqmin=0.05, freqmax=0.10,
+                corners=4, zerophase=False)
+
+    syn.detrend("linear")
+    syn.taper(max_percentage=0.05, type="hann")
+    syn.filter("bandpass", freqmin=0.05, freqmax=0.10,
+                corners=4, zerophase=False)
+
+
+    win.CreateInfoStatEvent(obs,10.0)
+    win.CreateWindows(obs,syn,plot=True)
+
+
+    
+
+    if len(win.windows) > 1:
+        ti = win.windows[1].left
+        tf = win.windows[1].right
+        print ti*2,tf,'HOLA'
+        print syn[0].stats.sampling_rate
+        tao = int(win.windows[1].cc_shift)
+        print tao
+        syn[0].data[ti + tao:tf+tao] = syn[0].data[ti:tf]
+
+        plt.figure()
+        plt.plot(syn[0].data,'r')
+        plt.plot(obs[0].data,'k')
+        
+    
+par = param()
+win = windows(par)
+
+os.chdir("shot22")
+
+stat = np.genfromtxt('receptors.par',dtype='str',comments='#',delimiter=',')
+n = stat.shape # n[0] number of stations that record the event
+os.chdir('DATA/')
+            
+for i in range(0,n[0]):
+    rx_v = np.fromfile(stat[i,0].strip()+'-VX.bin',dtype='f4')
+    ry_v = np.fromfile(stat[i,0].strip()+'-VY.bin',dtype='f4')
+    rz_v = np.fromfile(stat[i,0].strip()+'-VZ.bin',dtype='f4')
+    obs_rx_v = obspy.read(stat[i,0].strip()+'-HHE-OBS.sac')
+    obs_ry_v = obspy.read(stat[i,0].strip()+'-HHN-OBS.sac')
+    obs_rz_v = obspy.read(stat[i,0].strip()+'-HHZ-OBS.sac')
+    CreateWin(obs_rx_v,rx_v,win)
+    CreateWin(obs_ry_v,ry_v,win)
+    CreateWin(obs_rz_v,rz_v,win)
+
+
+
+

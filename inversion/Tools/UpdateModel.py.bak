@@ -1,0 +1,64 @@
+import subprocess
+import numpy as np
+#from inversion.Tools.parameter import param
+
+class UpdateParam:
+	def __init__(self,par):
+		self.par = par
+
+	def UpdateTest(self):
+                mtest = np.fromfile(self.par.FoldIter +"/m-test.bin",dtype='f4')
+                mnew = np.fromfile(self.par.FoldIter +"/m-new.bin",dtype='f4')
+                nstride = self.par.nodx * self.par.nody * self.par.nodz
+
+                rho = mtest[0:nstride]
+                vp = mtest[nstride:2 * nstride]
+                vs = mtest[2 * nstride:3 * nstride]
+
+                #vp = mtest[0:nstride]
+                #vs = mtest[nstride:2 * nstride]
+
+                #a1 = vp/vs < 1.58
+		#a2 = vp/vs > 1.88
+                
+		#rho[a1] = rhon[a1]
+		#vp[a1] = vpn[a1]
+               	#vs[a1] = vsn[a1]
+		
+		#rho[a2] = rhon[a2]
+                #vp[a2] = vpn[a2]
+                #vs[a2] = vsn[a2]
+
+                #rho = rhon
+                #vp = vpn
+                #vs = vsn
+
+                rho.astype('f4').tofile(self.par.WorkDir+"/RHO.bin") 
+                vp.astype('f4').tofile(self.par.WorkDir+"/VP.bin")
+                vs.astype('f4').tofile(self.par.WorkDir+"/VS.bin")
+
+
+        def NewRestart(self):
+                mtest = np.fromfile(self.par.FoldIter +"/m-new.bin",dtype='f4')
+                nstride = self.par.nodx * self.par.nody * self.par.nodz
+
+                #vp = mtest[0:nstride]
+                #vs = mtest[nstride:2 * nstride]
+
+                rho = mtest[0:nstride]
+                vp = mtest[nstride:2 * nstride]
+                vs = mtest[2 * nstride:3 * nstride]
+
+                rho.astype('f4').tofile(self.par.WorkDir+"/RHO.bin")
+                vp.astype('f4').tofile(self.par.WorkDir+"/VP.bin")
+                vs.astype('f4').tofile(self.par.WorkDir+"/VS.bin")
+                
+
+	def UpdateNew(self):
+                rho = np.fromfile(self.par.WorkDir +"/RHO.bin",dtype='f4')
+                vp = np.fromfile(self.par.WorkDir +"/VP.bin",dtype='f4')
+                vs = np.fromfile(self.par.WorkDir +"/VS.bin",dtype='f4')
+                m = np.concatenate((rho,vp,vs))
+                #m = np.concatenate((vp,vs))
+                m.astype('f4').tofile(self.par.FoldIter +"/m-new.bin")
+                

@@ -1,0 +1,25 @@
+import numpy as np 
+from inversion.Methods.LBFGS import LBFGS as m_LBFGS
+from inversion.LineSearch.backtracking import Backtrack
+
+class LBFGS:
+         """ LBFGS
+         """
+         def Setup(self,maxiter,thresh):
+             BFGS_memory = 5
+             self.BFGS = m_LBFGS(BFGS_memory,maxiter,thresh)
+
+         def Setup_LineSearch(self,step_count_max,step_len_max):
+                  self.LineSearch = Backtrack(step_count_max,step_len_max)
+
+
+         def Compute_Direction(self):
+                  pnew,self.restarted = self.BFGS()
+                  pnew.astype('f4').tofile("p-new.bin");
+
+         def Restart(self):
+                  self.BFGS.restart()
+
+         def iter(self):
+                  return self.BFGS.iter
+                  

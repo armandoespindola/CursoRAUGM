@@ -1,0 +1,1313 @@
+Parameters Subdomain and OpenMP threads
+Sx : 3 Sy : 3 Sz : 3
+N_omp : 1
+DX 100
+DY 100
+DZ 100
+HALO_NodX 144
+HALO_NodY 144
+HALO_NodZ 72
+Nodes_Subdomain X 48
+Nodes_Subdomain Y 48
+Nodes_Subdomain Z 24
+Time steps: 800
+Source File: sources.par
+File VP: ../VP.bin
+File VS: ../VS.bin
+File RHO: ../RHO.bin
+Time broadcasting model to MPI cores : 0.056951
+
+
+##################
+SOURCE INFORMATION
+##################
+
+##################
+Source #: 0
+ X: 4590
+ Y: 7111.7
+ Z: 4996.9
+ M0: 3.28e+16
+ MXX,MXY,MXZ,MYY,MYZ,MZZ: 
+ 2.47e+16, 0, 0, 2.47e+16, 0, 2.47e+16
+ Node_X(Mesh Location) : 53
+ Node_Y(Mesh Location) : 79
+ Node_Z(Mesh Location) : 50
+ X(Mesh Location) : 4550
+ Y(Mesh Location) : 7150
+ Z(Mesh Location) : 4950
+ X(Error Location) : 40
+ Y(Error Location) : 38.2998
+ Z(Error Location) : 46.8999
+
+
+######################
+RECEPTORS INFORMATION
+######################
+
+##########################
+ STATION # 0 : X1
+ X: 2367.6
+ Y: 3732.4
+ Z: 100
+ Node_X(Mesh Location) : 31
+ Node_Y(Mesh Location) : 45
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2350
+ Y(Mesh Location) : 3750
+ Z(Mesh Location) : 50
+ X(Error Location) : 17.6001
+ Y(Error Location) : 17.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 1 : X2
+ X: 4924.5
+ Y: 6822
+ Z: 100
+ Node_X(Mesh Location) : 57
+ Node_Y(Mesh Location) : 76
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4950
+ Y(Mesh Location) : 6850
+ Z(Mesh Location) : 50
+ X(Error Location) : 25.5
+ Y(Error Location) : 28
+ Z(Error Location) : 50
+
+##########################
+ STATION # 2 : X3
+ X: 4921.4
+ Y: 3206.4
+ Z: 100
+ Node_X(Mesh Location) : 57
+ Node_Y(Mesh Location) : 40
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4950
+ Y(Mesh Location) : 3250
+ Z(Mesh Location) : 50
+ X(Error Location) : 28.6001
+ Y(Error Location) : 43.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 3 : X4
+ X: 6500
+ Y: 5234.7
+ Z: 100
+ Node_X(Mesh Location) : 72
+ Node_Y(Mesh Location) : 60
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 6450
+ Y(Mesh Location) : 5250
+ Z(Mesh Location) : 50
+ X(Error Location) : 50
+ Y(Error Location) : 15.2998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 4 : X5
+ X: 7047.8
+ Y: 6308.2
+ Z: 100
+ Node_X(Mesh Location) : 78
+ Node_Y(Mesh Location) : 71
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7050
+ Y(Mesh Location) : 6350
+ Z(Mesh Location) : 50
+ X(Error Location) : 2.2002
+ Y(Error Location) : 41.7998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 5 : X6
+ X: 7042.6
+ Y: 8666.8
+ Z: 100
+ Node_X(Mesh Location) : 78
+ Node_Y(Mesh Location) : 94
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7050
+ Y(Mesh Location) : 8650
+ Z(Mesh Location) : 50
+ X(Error Location) : 7.3999
+ Y(Error Location) : 16.7998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 6 : X7
+ X: 4617.6
+ Y: 9467.3
+ Z: 100
+ Node_X(Mesh Location) : 54
+ Node_Y(Mesh Location) : 102
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4650
+ Y(Mesh Location) : 9450
+ Z(Mesh Location) : 50
+ X(Error Location) : 32.3999
+ Y(Error Location) : 17.2998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 7 : X8
+ X: 5716
+ Y: 10402.9
+ Z: 100
+ Node_X(Mesh Location) : 65
+ Node_Y(Mesh Location) : 112
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5750
+ Y(Mesh Location) : 10450
+ Z(Mesh Location) : 50
+ X(Error Location) : 34
+ Y(Error Location) : 47.0996
+ Z(Error Location) : 50
+
+##########################
+ STATION # 8 : X9
+ X: 2625.6
+ Y: 10299.2
+ Z: 100
+ Node_X(Mesh Location) : 34
+ Node_Y(Mesh Location) : 110
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2650
+ Y(Mesh Location) : 10250
+ Z(Mesh Location) : 50
+ X(Error Location) : 24.3999
+ Y(Error Location) : 49.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 9 : X10
+ X: 4249.8
+ Y: 4856.8
+ Z: 100
+ Node_X(Mesh Location) : 50
+ Node_Y(Mesh Location) : 56
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4250
+ Y(Mesh Location) : 4850
+ Z(Mesh Location) : 50
+ X(Error Location) : 0.200195
+ Y(Error Location) : 6.7998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 10 : X11
+ X: 4803.6
+ Y: 4115.5
+ Z: 100
+ Node_X(Mesh Location) : 56
+ Node_Y(Mesh Location) : 49
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4850
+ Y(Mesh Location) : 4150
+ Z(Mesh Location) : 50
+ X(Error Location) : 46.3999
+ Y(Error Location) : 34.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 11 : X12
+ X: 2395.3
+ Y: 10752.6
+ Z: 100
+ Node_X(Mesh Location) : 31
+ Node_Y(Mesh Location) : 115
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2350
+ Y(Mesh Location) : 10750
+ Z(Mesh Location) : 50
+ X(Error Location) : 45.3
+ Y(Error Location) : 2.59961
+ Z(Error Location) : 50
+
+##########################
+ STATION # 12 : X13
+ X: 4751.4
+ Y: 5924.3
+ Z: 100
+ Node_X(Mesh Location) : 55
+ Node_Y(Mesh Location) : 67
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4750
+ Y(Mesh Location) : 5950
+ Z(Mesh Location) : 50
+ X(Error Location) : 1.3999
+ Y(Error Location) : 25.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 13 : X14
+ X: 7239
+ Y: 2321.7
+ Z: 100
+ Node_X(Mesh Location) : 80
+ Node_Y(Mesh Location) : 31
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7250
+ Y(Mesh Location) : 2350
+ Z(Mesh Location) : 50
+ X(Error Location) : 11
+ Y(Error Location) : 28.3
+ Z(Error Location) : 50
+
+##########################
+ STATION # 14 : X15
+ X: 6472.5
+ Y: 6008.4
+ Z: 100
+ Node_X(Mesh Location) : 72
+ Node_Y(Mesh Location) : 68
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 6450
+ Y(Mesh Location) : 6050
+ Z(Mesh Location) : 50
+ X(Error Location) : 22.5
+ Y(Error Location) : 41.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 15 : X16
+ X: 2920.5
+ Y: 4220.4
+ Z: 100
+ Node_X(Mesh Location) : 37
+ Node_Y(Mesh Location) : 50
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2950
+ Y(Mesh Location) : 4250
+ Z(Mesh Location) : 50
+ X(Error Location) : 29.5
+ Y(Error Location) : 29.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 16 : X17
+ X: 4238.1
+ Y: 6779.6
+ Z: 100
+ Node_X(Mesh Location) : 50
+ Node_Y(Mesh Location) : 75
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4250
+ Y(Mesh Location) : 6750
+ Z(Mesh Location) : 50
+ X(Error Location) : 11.8999
+ Y(Error Location) : 29.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 17 : X18
+ X: 2220.1
+ Y: 3015.4
+ Z: 100
+ Node_X(Mesh Location) : 30
+ Node_Y(Mesh Location) : 38
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2250
+ Y(Mesh Location) : 3050
+ Z(Mesh Location) : 50
+ X(Error Location) : 29.8999
+ Y(Error Location) : 34.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 18 : X19
+ X: 2106.2
+ Y: 3888.8
+ Z: 100
+ Node_X(Mesh Location) : 29
+ Node_Y(Mesh Location) : 46
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2150
+ Y(Mesh Location) : 3850
+ Z(Mesh Location) : 50
+ X(Error Location) : 43.8
+ Y(Error Location) : 38.8
+ Z(Error Location) : 50
+
+##########################
+ STATION # 19 : X20
+ X: 2527.6
+ Y: 6406.9
+ Z: 100
+ Node_X(Mesh Location) : 33
+ Node_Y(Mesh Location) : 72
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2550
+ Y(Mesh Location) : 6450
+ Z(Mesh Location) : 50
+ X(Error Location) : 22.3999
+ Y(Error Location) : 43.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 20 : X21
+ X: 3037
+ Y: 4239.4
+ Z: 100
+ Node_X(Mesh Location) : 38
+ Node_Y(Mesh Location) : 50
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3050
+ Y(Mesh Location) : 4250
+ Z(Mesh Location) : 50
+ X(Error Location) : 13
+ Y(Error Location) : 10.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 21 : X22
+ X: 3544.6
+ Y: 8390.4
+ Z: 100
+ Node_X(Mesh Location) : 43
+ Node_Y(Mesh Location) : 91
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3550
+ Y(Mesh Location) : 8350
+ Z(Mesh Location) : 50
+ X(Error Location) : 5.3999
+ Y(Error Location) : 40.4004
+ Z(Error Location) : 50
+
+##########################
+ STATION # 22 : X23
+ X: 3761.6
+ Y: 4152.3
+ Z: 100
+ Node_X(Mesh Location) : 45
+ Node_Y(Mesh Location) : 49
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3750
+ Y(Mesh Location) : 4150
+ Z(Mesh Location) : 50
+ X(Error Location) : 11.6001
+ Y(Error Location) : 2.2998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 23 : X24
+ X: 1916.3
+ Y: 10849.2
+ Z: 100
+ Node_X(Mesh Location) : 27
+ Node_Y(Mesh Location) : 116
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 1950
+ Y(Mesh Location) : 10850
+ Z(Mesh Location) : 50
+ X(Error Location) : 33.7
+ Y(Error Location) : 0.799805
+ Z(Error Location) : 50
+
+##########################
+ STATION # 24 : X25
+ X: 7364.5
+ Y: 8104.9
+ Z: 100
+ Node_X(Mesh Location) : 81
+ Node_Y(Mesh Location) : 89
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7350
+ Y(Mesh Location) : 8150
+ Z(Mesh Location) : 50
+ X(Error Location) : 14.5
+ Y(Error Location) : 45.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 25 : X26
+ X: 6557.7
+ Y: 5220.9
+ Z: 100
+ Node_X(Mesh Location) : 73
+ Node_Y(Mesh Location) : 60
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 6550
+ Y(Mesh Location) : 5250
+ Z(Mesh Location) : 50
+ X(Error Location) : 7.7002
+ Y(Error Location) : 29.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 26 : X27
+ X: 7314.2
+ Y: 6658
+ Z: 100
+ Node_X(Mesh Location) : 81
+ Node_Y(Mesh Location) : 74
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7350
+ Y(Mesh Location) : 6650
+ Z(Mesh Location) : 50
+ X(Error Location) : 35.7998
+ Y(Error Location) : 8
+ Z(Error Location) : 50
+
+##########################
+ STATION # 27 : X28
+ X: 2849.7
+ Y: 10485.4
+ Z: 100
+ Node_X(Mesh Location) : 36
+ Node_Y(Mesh Location) : 112
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2850
+ Y(Mesh Location) : 10450
+ Z(Mesh Location) : 50
+ X(Error Location) : 0.300049
+ Y(Error Location) : 35.4004
+ Z(Error Location) : 50
+
+##########################
+ STATION # 28 : X29
+ X: 4671
+ Y: 9788.8
+ Z: 100
+ Node_X(Mesh Location) : 54
+ Node_Y(Mesh Location) : 105
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4650
+ Y(Mesh Location) : 9750
+ Z(Mesh Location) : 50
+ X(Error Location) : 21
+ Y(Error Location) : 38.7998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 29 : X30
+ X: 3229.1
+ Y: 10223.3
+ Z: 100
+ Node_X(Mesh Location) : 40
+ Node_Y(Mesh Location) : 110
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3250
+ Y(Mesh Location) : 10250
+ Z(Mesh Location) : 50
+ X(Error Location) : 20.8999
+ Y(Error Location) : 26.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 30 : X31
+ X: 5399.6
+ Y: 7026.8
+ Z: 100
+ Node_X(Mesh Location) : 61
+ Node_Y(Mesh Location) : 78
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5350
+ Y(Mesh Location) : 7050
+ Z(Mesh Location) : 50
+ X(Error Location) : 49.6001
+ Y(Error Location) : 23.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 31 : X32
+ X: 4469.7
+ Y: 4012
+ Z: 100
+ Node_X(Mesh Location) : 52
+ Node_Y(Mesh Location) : 48
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4450
+ Y(Mesh Location) : 4050
+ Z(Mesh Location) : 50
+ X(Error Location) : 19.7002
+ Y(Error Location) : 38
+ Z(Error Location) : 50
+
+##########################
+ STATION # 32 : X33
+ X: 7140.3
+ Y: 2674.5
+ Z: 100
+ Node_X(Mesh Location) : 79
+ Node_Y(Mesh Location) : 34
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7150
+ Y(Mesh Location) : 2650
+ Z(Mesh Location) : 50
+ X(Error Location) : 9.7002
+ Y(Error Location) : 24.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 33 : X34
+ X: 5653.2
+ Y: 10237.9
+ Z: 100
+ Node_X(Mesh Location) : 64
+ Node_Y(Mesh Location) : 110
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5650
+ Y(Mesh Location) : 10250
+ Z(Mesh Location) : 50
+ X(Error Location) : 3.2002
+ Y(Error Location) : 12.0996
+ Z(Error Location) : 50
+
+##########################
+ STATION # 34 : X35
+ X: 4140.7
+ Y: 9036.9
+ Z: 100
+ Node_X(Mesh Location) : 49
+ Node_Y(Mesh Location) : 98
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4150
+ Y(Mesh Location) : 9050
+ Z(Mesh Location) : 50
+ X(Error Location) : 9.2998
+ Y(Error Location) : 13.0996
+ Z(Error Location) : 50
+
+##########################
+ STATION # 35 : X36
+ X: 5690.7
+ Y: 4646.8
+ Z: 100
+ Node_X(Mesh Location) : 64
+ Node_Y(Mesh Location) : 54
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5650
+ Y(Mesh Location) : 4650
+ Z(Mesh Location) : 50
+ X(Error Location) : 40.7002
+ Y(Error Location) : 3.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 36 : X37
+ X: 4499.4
+ Y: 10606.2
+ Z: 100
+ Node_X(Mesh Location) : 52
+ Node_Y(Mesh Location) : 114
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4450
+ Y(Mesh Location) : 10650
+ Z(Mesh Location) : 50
+ X(Error Location) : 49.3999
+ Y(Error Location) : 43.7998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 37 : X38
+ X: 6836.3
+ Y: 6709.5
+ Z: 100
+ Node_X(Mesh Location) : 76
+ Node_Y(Mesh Location) : 75
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 6850
+ Y(Mesh Location) : 6750
+ Z(Mesh Location) : 50
+ X(Error Location) : 13.7002
+ Y(Error Location) : 40.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 38 : X39
+ X: 6134.1
+ Y: 7631
+ Z: 100
+ Node_X(Mesh Location) : 69
+ Node_Y(Mesh Location) : 84
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 6150
+ Y(Mesh Location) : 7650
+ Z(Mesh Location) : 50
+ X(Error Location) : 15.8999
+ Y(Error Location) : 19
+ Z(Error Location) : 50
+
+##########################
+ STATION # 39 : X40
+ X: 6102.1
+ Y: 4473.4
+ Z: 100
+ Node_X(Mesh Location) : 69
+ Node_Y(Mesh Location) : 52
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 6150
+ Y(Mesh Location) : 4450
+ Z(Mesh Location) : 50
+ X(Error Location) : 47.8999
+ Y(Error Location) : 23.3999
+ Z(Error Location) : 50
+
+##########################
+ STATION # 40 : X41
+ X: 5062.5
+ Y: 10662.7
+ Z: 100
+ Node_X(Mesh Location) : 58
+ Node_Y(Mesh Location) : 114
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5050
+ Y(Mesh Location) : 10650
+ Z(Mesh Location) : 50
+ X(Error Location) : 12.5
+ Y(Error Location) : 12.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 41 : X42
+ X: 3918.1
+ Y: 5371.4
+ Z: 100
+ Node_X(Mesh Location) : 47
+ Node_Y(Mesh Location) : 61
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3950
+ Y(Mesh Location) : 5350
+ Z(Mesh Location) : 50
+ X(Error Location) : 31.8999
+ Y(Error Location) : 21.3999
+ Z(Error Location) : 50
+
+##########################
+ STATION # 42 : X43
+ X: 2438.6
+ Y: 6965.2
+ Z: 100
+ Node_X(Mesh Location) : 32
+ Node_Y(Mesh Location) : 77
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2450
+ Y(Mesh Location) : 6950
+ Z(Mesh Location) : 50
+ X(Error Location) : 11.3999
+ Y(Error Location) : 15.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 43 : X44
+ X: 4420.3
+ Y: 7429
+ Z: 100
+ Node_X(Mesh Location) : 52
+ Node_Y(Mesh Location) : 82
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4450
+ Y(Mesh Location) : 7450
+ Z(Mesh Location) : 50
+ X(Error Location) : 29.7002
+ Y(Error Location) : 21
+ Z(Error Location) : 50
+
+##########################
+ STATION # 44 : X45
+ X: 3849.4
+ Y: 6022.9
+ Z: 100
+ Node_X(Mesh Location) : 46
+ Node_Y(Mesh Location) : 68
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3850
+ Y(Mesh Location) : 6050
+ Z(Mesh Location) : 50
+ X(Error Location) : 0.600098
+ Y(Error Location) : 27.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 45 : X46
+ X: 5303.5
+ Y: 2390.9
+ Z: 100
+ Node_X(Mesh Location) : 61
+ Node_Y(Mesh Location) : 31
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5350
+ Y(Mesh Location) : 2350
+ Z(Mesh Location) : 50
+ X(Error Location) : 46.5
+ Y(Error Location) : 40.8999
+ Z(Error Location) : 50
+
+##########################
+ STATION # 46 : X47
+ X: 4775.4
+ Y: 4836.9
+ Z: 100
+ Node_X(Mesh Location) : 55
+ Node_Y(Mesh Location) : 56
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4750
+ Y(Mesh Location) : 4850
+ Z(Mesh Location) : 50
+ X(Error Location) : 25.3999
+ Y(Error Location) : 13.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 47 : X48
+ X: 4958.8
+ Y: 6022.8
+ Z: 100
+ Node_X(Mesh Location) : 57
+ Node_Y(Mesh Location) : 68
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4950
+ Y(Mesh Location) : 6050
+ Z(Mesh Location) : 50
+ X(Error Location) : 8.7998
+ Y(Error Location) : 27.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 48 : X49
+ X: 1977.9
+ Y: 4830.6
+ Z: 100
+ Node_X(Mesh Location) : 27
+ Node_Y(Mesh Location) : 56
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 1950
+ Y(Mesh Location) : 4850
+ Z(Mesh Location) : 50
+ X(Error Location) : 27.9
+ Y(Error Location) : 19.3999
+ Z(Error Location) : 50
+
+##########################
+ STATION # 49 : X50
+ X: 4473
+ Y: 2581.6
+ Z: 100
+ Node_X(Mesh Location) : 52
+ Node_Y(Mesh Location) : 33
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4450
+ Y(Mesh Location) : 2550
+ Z(Mesh Location) : 50
+ X(Error Location) : 23
+ Y(Error Location) : 31.6001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 50 : X51
+ X: 4924.7
+ Y: 9554.2
+ Z: 100
+ Node_X(Mesh Location) : 57
+ Node_Y(Mesh Location) : 103
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4950
+ Y(Mesh Location) : 9550
+ Z(Mesh Location) : 50
+ X(Error Location) : 25.2998
+ Y(Error Location) : 4.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 51 : X52
+ X: 5682.5
+ Y: 1977
+ Z: 100
+ Node_X(Mesh Location) : 64
+ Node_Y(Mesh Location) : 27
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5650
+ Y(Mesh Location) : 1950
+ Z(Mesh Location) : 50
+ X(Error Location) : 32.5
+ Y(Error Location) : 27
+ Z(Error Location) : 50
+
+##########################
+ STATION # 52 : X53
+ X: 4764.9
+ Y: 8859
+ Z: 100
+ Node_X(Mesh Location) : 55
+ Node_Y(Mesh Location) : 96
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4750
+ Y(Mesh Location) : 8850
+ Z(Mesh Location) : 50
+ X(Error Location) : 14.8999
+ Y(Error Location) : 9
+ Z(Error Location) : 50
+
+##########################
+ STATION # 53 : X54
+ X: 5094.1
+ Y: 7651.7
+ Z: 100
+ Node_X(Mesh Location) : 58
+ Node_Y(Mesh Location) : 84
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5050
+ Y(Mesh Location) : 7650
+ Z(Mesh Location) : 50
+ X(Error Location) : 44.1001
+ Y(Error Location) : 1.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 54 : X55
+ X: 5672.9
+ Y: 7259.9
+ Z: 100
+ Node_X(Mesh Location) : 64
+ Node_Y(Mesh Location) : 80
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5650
+ Y(Mesh Location) : 7250
+ Z(Mesh Location) : 50
+ X(Error Location) : 22.8999
+ Y(Error Location) : 9.8999
+ Z(Error Location) : 50
+
+##########################
+ STATION # 55 : X56
+ X: 4528.4
+ Y: 9330.4
+ Z: 100
+ Node_X(Mesh Location) : 53
+ Node_Y(Mesh Location) : 101
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4550
+ Y(Mesh Location) : 9350
+ Z(Mesh Location) : 50
+ X(Error Location) : 21.6001
+ Y(Error Location) : 19.5996
+ Z(Error Location) : 50
+
+##########################
+ STATION # 56 : X57
+ X: 3548.2
+ Y: 5266.7
+ Z: 100
+ Node_X(Mesh Location) : 43
+ Node_Y(Mesh Location) : 60
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3550
+ Y(Mesh Location) : 5250
+ Z(Mesh Location) : 50
+ X(Error Location) : 1.80005
+ Y(Error Location) : 16.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 57 : X58
+ X: 7109.5
+ Y: 6530.5
+ Z: 100
+ Node_X(Mesh Location) : 79
+ Node_Y(Mesh Location) : 73
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7150
+ Y(Mesh Location) : 6550
+ Z(Mesh Location) : 50
+ X(Error Location) : 40.5
+ Y(Error Location) : 19.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 58 : X59
+ X: 6359.5
+ Y: 8523.8
+ Z: 100
+ Node_X(Mesh Location) : 71
+ Node_Y(Mesh Location) : 93
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 6350
+ Y(Mesh Location) : 8550
+ Z(Mesh Location) : 50
+ X(Error Location) : 9.5
+ Y(Error Location) : 26.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 59 : X60
+ X: 5899.9
+ Y: 3672.1
+ Z: 100
+ Node_X(Mesh Location) : 66
+ Node_Y(Mesh Location) : 44
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5850
+ Y(Mesh Location) : 3650
+ Z(Mesh Location) : 50
+ X(Error Location) : 49.8999
+ Y(Error Location) : 22.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 60 : X61
+ X: 4688.2
+ Y: 2302.9
+ Z: 100
+ Node_X(Mesh Location) : 54
+ Node_Y(Mesh Location) : 31
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4650
+ Y(Mesh Location) : 2350
+ Z(Mesh Location) : 50
+ X(Error Location) : 38.2002
+ Y(Error Location) : 47.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 61 : X62
+ X: 4297.6
+ Y: 3826.9
+ Z: 100
+ Node_X(Mesh Location) : 50
+ Node_Y(Mesh Location) : 46
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4250
+ Y(Mesh Location) : 3850
+ Z(Mesh Location) : 50
+ X(Error Location) : 47.6001
+ Y(Error Location) : 23.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 62 : X63
+ X: 2839.5
+ Y: 7045.3
+ Z: 100
+ Node_X(Mesh Location) : 36
+ Node_Y(Mesh Location) : 78
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2850
+ Y(Mesh Location) : 7050
+ Z(Mesh Location) : 50
+ X(Error Location) : 10.5
+ Y(Error Location) : 4.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 63 : X64
+ X: 2352.1
+ Y: 5406
+ Z: 100
+ Node_X(Mesh Location) : 31
+ Node_Y(Mesh Location) : 62
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2350
+ Y(Mesh Location) : 5450
+ Z(Mesh Location) : 50
+ X(Error Location) : 2.1001
+ Y(Error Location) : 44
+ Z(Error Location) : 50
+
+##########################
+ STATION # 64 : X65
+ X: 2507.9
+ Y: 9382.5
+ Z: 100
+ Node_X(Mesh Location) : 33
+ Node_Y(Mesh Location) : 101
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2550
+ Y(Mesh Location) : 9350
+ Z(Mesh Location) : 50
+ X(Error Location) : 42.1001
+ Y(Error Location) : 32.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 65 : X66
+ X: 3079.1
+ Y: 6267.5
+ Z: 100
+ Node_X(Mesh Location) : 38
+ Node_Y(Mesh Location) : 70
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 3050
+ Y(Mesh Location) : 6250
+ Z(Mesh Location) : 50
+ X(Error Location) : 29.1001
+ Y(Error Location) : 17.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 66 : X67
+ X: 2586.1
+ Y: 10495.4
+ Z: 100
+ Node_X(Mesh Location) : 33
+ Node_Y(Mesh Location) : 112
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 2550
+ Y(Mesh Location) : 10450
+ Z(Mesh Location) : 50
+ X(Error Location) : 36.1001
+ Y(Error Location) : 45.4004
+ Z(Error Location) : 50
+
+##########################
+ STATION # 67 : X68
+ X: 4445.5
+ Y: 10166.7
+ Z: 100
+ Node_X(Mesh Location) : 52
+ Node_Y(Mesh Location) : 109
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 4450
+ Y(Mesh Location) : 10150
+ Z(Mesh Location) : 50
+ X(Error Location) : 4.5
+ Y(Error Location) : 16.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 68 : X69
+ X: 5853.9
+ Y: 8777.8
+ Z: 100
+ Node_X(Mesh Location) : 66
+ Node_Y(Mesh Location) : 95
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 5850
+ Y(Mesh Location) : 8750
+ Z(Mesh Location) : 50
+ X(Error Location) : 3.8999
+ Y(Error Location) : 27.7998
+ Z(Error Location) : 50
+
+##########################
+ STATION # 69 : X70
+ X: 8663.8
+ Y: 7768
+ Z: 100
+ Node_X(Mesh Location) : 94
+ Node_Y(Mesh Location) : 85
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 8650
+ Y(Mesh Location) : 7750
+ Z(Mesh Location) : 50
+ X(Error Location) : 13.7998
+ Y(Error Location) : 18
+ Z(Error Location) : 50
+
+##########################
+ STATION # 70 : X71
+ X: 9378.5
+ Y: 8113.8
+ Z: 100
+ Node_X(Mesh Location) : 101
+ Node_Y(Mesh Location) : 89
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 9350
+ Y(Mesh Location) : 8150
+ Z(Mesh Location) : 50
+ X(Error Location) : 28.5
+ Y(Error Location) : 36.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 71 : X72
+ X: 8833.6
+ Y: 6436.6
+ Z: 100
+ Node_X(Mesh Location) : 96
+ Node_Y(Mesh Location) : 72
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 8850
+ Y(Mesh Location) : 6450
+ Z(Mesh Location) : 50
+ X(Error Location) : 16.4004
+ Y(Error Location) : 13.3999
+ Z(Error Location) : 50
+
+##########################
+ STATION # 72 : X73
+ X: 7708.4
+ Y: 9317.1
+ Z: 100
+ Node_X(Mesh Location) : 85
+ Node_Y(Mesh Location) : 101
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7750
+ Y(Mesh Location) : 9350
+ Z(Mesh Location) : 50
+ X(Error Location) : 41.6001
+ Y(Error Location) : 32.9004
+ Z(Error Location) : 50
+
+##########################
+ STATION # 73 : X74
+ X: 8037.3
+ Y: 10710.8
+ Z: 100
+ Node_X(Mesh Location) : 88
+ Node_Y(Mesh Location) : 115
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 8050
+ Y(Mesh Location) : 10750
+ Z(Mesh Location) : 50
+ X(Error Location) : 12.7002
+ Y(Error Location) : 39.2002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 74 : X75
+ X: 10044.6
+ Y: 10122.4
+ Z: 100
+ Node_X(Mesh Location) : 108
+ Node_Y(Mesh Location) : 109
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 10050
+ Y(Mesh Location) : 10150
+ Z(Mesh Location) : 50
+ X(Error Location) : 5.40039
+ Y(Error Location) : 27.5996
+ Z(Error Location) : 50
+
+##########################
+ STATION # 75 : X76
+ X: 7474.1
+ Y: 7277.7
+ Z: 100
+ Node_X(Mesh Location) : 82
+ Node_Y(Mesh Location) : 80
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 7450
+ Y(Mesh Location) : 7250
+ Z(Mesh Location) : 50
+ X(Error Location) : 24.1001
+ Y(Error Location) : 27.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 76 : X77
+ X: 10202.2
+ Y: 7120.5
+ Z: 100
+ Node_X(Mesh Location) : 110
+ Node_Y(Mesh Location) : 79
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 10250
+ Y(Mesh Location) : 7150
+ Z(Mesh Location) : 50
+ X(Error Location) : 47.7998
+ Y(Error Location) : 29.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 77 : X78
+ X: 8399.5
+ Y: 7932.9
+ Z: 100
+ Node_X(Mesh Location) : 91
+ Node_Y(Mesh Location) : 87
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 8350
+ Y(Mesh Location) : 7950
+ Z(Mesh Location) : 50
+ X(Error Location) : 49.5
+ Y(Error Location) : 17.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 78 : X79
+ X: 9576.5
+ Y: 9433.5
+ Z: 100
+ Node_X(Mesh Location) : 103
+ Node_Y(Mesh Location) : 102
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 9550
+ Y(Mesh Location) : 9450
+ Z(Mesh Location) : 50
+ X(Error Location) : 26.5
+ Y(Error Location) : 16.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 79 : X80
+ X: 8366.2
+ Y: 6698.1
+ Z: 100
+ Node_X(Mesh Location) : 91
+ Node_Y(Mesh Location) : 74
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 8350
+ Y(Mesh Location) : 6650
+ Z(Mesh Location) : 50
+ X(Error Location) : 16.2002
+ Y(Error Location) : 48.1001
+ Z(Error Location) : 50
+
+##########################
+ STATION # 80 : X81
+ X: 8232.1
+ Y: 6554.7
+ Z: 100
+ Node_X(Mesh Location) : 90
+ Node_Y(Mesh Location) : 73
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 8250
+ Y(Mesh Location) : 6550
+ Z(Mesh Location) : 50
+ X(Error Location) : 17.9004
+ Y(Error Location) : 4.7002
+ Z(Error Location) : 50
+
+##########################
+ STATION # 81 : X82
+ X: 9663.2
+ Y: 9487.5
+ Z: 100
+ Node_X(Mesh Location) : 104
+ Node_Y(Mesh Location) : 102
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 9650
+ Y(Mesh Location) : 9450
+ Z(Mesh Location) : 50
+ X(Error Location) : 13.2002
+ Y(Error Location) : 37.5
+ Z(Error Location) : 50
+
+##########################
+ STATION # 82 : X83
+ X: 9647.8
+ Y: 8504.9
+ Z: 100
+ Node_X(Mesh Location) : 104
+ Node_Y(Mesh Location) : 93
+ Node_Z(Mesh Location) : 1
+ X(Mesh Location) : 9650
+ Y(Mesh Location) : 8550
+ Z(Mesh Location) : 50
+ X(Error Location) : 2.2002
+ Y(Error Location) : 45.0996
+ Z(Error Location) : 50
+
+
+###############################
+###############################
+      SIMULATION STARTS
+
+Time step : 100 of 800 rank 0 tproc 27
+Time step : 200 of 800 rank 0 tproc 27
+Time step : 300 of 800 rank 0 tproc 27
+Time step : 400 of 800 rank 0 tproc 27
+Time step : 500 of 800 rank 0 tproc 27
+Time step : 600 of 800 rank 0 tproc 27
+Time step : 700 of 800 rank 0 tproc 27
+END	 TIME(STEP): 0.031196	 HOLE TIME: 24.956660
+Time step : 700 of 800 rank 0 tproc 27
+Time step : 600 of 800 rank 0 tproc 27
+Time step : 500 of 800 rank 0 tproc 27
+Time step : 400 of 800 rank 0 tproc 27
+Time step : 300 of 800 rank 0 tproc 27
+Time step : 200 of 800 rank 0 tproc 27
+Time step : 100 of 800 rank 0 tproc 27
+END	 TIME(STEP) ADJOINT: 0.069336	 HOLE TIME: 55.469068

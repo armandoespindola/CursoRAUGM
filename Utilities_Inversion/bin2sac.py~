@@ -1,0 +1,66 @@
+import obspy as obspy
+import numpy as np
+import sys
+import subprocess
+
+# Program coversion from bin to SAC
+# input:
+# dt
+# t0
+
+def bin2sac(t0,dt,OBS=0,SYN=0):
+    """ Performs format conversion from bin 
+    to sac.
+    
+    use:
+    
+    bin2sac t0 dt
+    
+    t0 - > origin time
+    dt - > sampling
+    """
+
+    
+    command = "ls -l *VX.bin | awk '{print $9}' | awk -F- '{print $1}'"
+    #Station
+    stat =subprocess.check_output(command,shell=True).split('\n')
+
+    compXYZ = ["VX","VY","VZ"]
+    compENZ = ["HHE","HHN","HHZ"]
+
+
+    if (SYN):
+        for j in range(0,3):
+            for i in range(0,len(stat)-1):
+                data = np.fromfile(stat[i] + "-" + compXYZ[j] + ".bin",dtype='f4')
+                print data.size
+                tr = obspy.core.trace.Trace(np.float64(data))
+                tr.stats.network = "TEST"
+                tr.stats.delta = dt
+                tr.stats.samplin_rate = 1.0 / dt
+                tr.stats.station = stat[i] + "-" + compENZ[j]
+                print tr.stats
+                tr.write( tr.stats.station + ".SAC",format="SAC")
+
+
+    if (OBS):
+        for j in range(0,3):
+            for i in range(0,len(stat)-1):
+                data = np.fromfile(stat[i] + "-" + compXYZ[j] + "-OBS.bin",dtype='f4')
+                print data.size
+                tr = obspy.core.trace.Trace(np.float64(data))
+                tr.stats.network = "TEST"
+                tr.stats.delta = dt
+                tr.stats.samplin_rate = 1.0 / dt
+                tr.stats.station = stat[i] + "-" + compENZ[j]
+                print tr.stats
+                tr.write(tr.stats.station + "-OBS.SAC",format="SAC")
+                
+   
+if __name__ == '__main__':
+    t0 = float(sys.argv[1])
+    dt = float(sys.argv[2])
+    obs = float(sys.argv[3])
+    syn = float(sys.argv[4])
+    bin2sac(t0,dt,obs,syn)
+

@@ -1,0 +1,36 @@
+##########################
+# Inversion Paramameters #
+##########################
+
+# MPI processes
+-nmpi 27
+
+# Windows Path
+-WinPath DATA/
+-FlexWinInput FlexWin.input
+
+# Forward and Adjoint Simulation File Parameters
+-parForw ParForward.par
+-parAdj ParAdjoint.par
+
+# Optimization Method
+# NLCG
+# LBFGS
+-method LBFGS
+
+# Iterations Optimization
+-maxiter 10
+-thresh 0.2
+
+# Line Search Parameters
+# if StepMaxAuto = 1 steplenmax is
+# utilized as factor for initial step
+
+-stepcountmax 5
+-steplenmax 1.2
+-StepMaxAuto 1
+
+
+
+
+

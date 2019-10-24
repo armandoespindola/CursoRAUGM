@@ -1,0 +1,112 @@
+import numpy as np 
+import matplotlib.pyplot as plt
+import math
+from scipy.signal import butter, lfilter
+from scipy.signal import freqz,freqz_zpk,sosfilt,zpk2sos
+from scipy import signal
+import subprocess
+import os
+import time,sys
+
+
+def butter_bandpass(lowcut, highcut, fs, order=5):
+    nyq = 0.5 * fs
+    low = lowcut / nyq
+    high = highcut / nyq
+    z, p,k = butter(order, [low, high], btype='bandpass',output='zpk')
+    return z, p,k
+
+def filter(data, lowcut, highcut, fs, order=5):
+    z, p, k = butter_bandpass(lowcut, highcut, fs, order=order)
+    sos = zpk2sos(z,p,k)
+    y = sosfilt(sos, data)
+    return y
+
+def Taper(data,alpha=0.2):
+    win = signal.tukey(data.size,alpha)
+    return win * data
+
+
+
+# Reading Arguments From Terminal
+if len(sys.argv) < 2:
+    print "##################"
+    print "##################"
+    print "Please provide the Event folder"
+    print "Example: WindowsManual.py shot12"
+    sys.exit(0)
+else:
+    shot = str(sys.argv[1])
+    print "Event: ", shot
+
+
+
+#shot = 'shot12'
+command = "ls -l "+ shot +"/DATA/*VX-OBS.bin | awk '{print $9}' | awk -F- '{print $1}' | awk -F/ '{print $3}'"
+#Station
+stat =subprocess.check_output(command,shell=True).split('\n')
+
+
+### Finite Diference
+dt = 0.01;
+nfd = 600;
+tfd = np.arange(0,nfd)*dt
+fd_fold = shot+'/DATA/'
+freq = [1.0,2.0]
+comp = ['VX','VY','VZ']
+
+#noise = np.genfromtxt(shot + '/STAT_NOISE_RATIO.txt',dtype='str',comments='#',delimiter=',')
+
+for i in range(0,len(stat)-1):
+    for icomp in comp:
+        syn = Taper(np.fromfile(fd_fold + stat[i] +'-'+ icomp +'.bin',dtype='f4')[:nfd],0.2)
+        syn = filter(syn, freq[0], freq[-1], 1.0/dt, order=4)[:nfd] #* float(noise[i,1])
+
+        data =  np.fromfile(fd_fold + stat[i] +'-'+ icomp + '-OBS.bin',dtype='f4')
+        data =  Taper(data,0.2)
+        data =  filter(data,freq[0],freq[-1], 1.0/dt, order=4) #* float(noise[i,1])
+
+
+        plt.figure(figsize=(9,3))
+        plt.title(stat[i])
+        plt.plot(tfd,data,'k',label='data-'+icomp)
+        plt.plot(tfd,syn,'r',label='syn-'+icomp)
+        plt.legend()
+
+        point = plt.ginput(-1)
+
+        nwin = int(len(point) / 2)
+
+        if icomp == 'VX':
+            bcomp = 'HHE'
+        if icomp == 'VY':
+            bcomp = 'HHN'
+        if icomp == 'VZ':
+            bcomp = 'HHZ'
+
+        name = stat[i] + '-' + bcomp+'.win.qual'
+
+        if nwin == 0:
+             f = open(fd_fold +'WIN/'+name,'w')
+             f.write('# NUM_WIN  = %d\n' % (nwin))
+             f.write(' # i win_start win_end Tshift CC dlnA\n')
+             f.close()
+
+        if nwin > 0:
+            f = open(fd_fold +'WIN/'+name,'w')
+            f.write('# NUM_WIN  = %d\n' % (nwin))
+            f.write(' # i win_start win_end Tshift CC dlnA\n')
+            for iwin in range (0,nwin):
+                point1 = point[iwin * 2 ]
+                point2 = point[iwin * 2 + 1]
+                t1 = point1[0]
+                t2 = point2[0]
+                f.write(' %d %.2f %.2f %.2f %.2f %.2f\n' % (iwin+1,t1,t2,0.0,0.0,0.0))
+            f.close()
+        plt.close()
+                
+                
+        
+# print "e_x,e_y,e_z",e_x,e_y,e_z
+
+ 
