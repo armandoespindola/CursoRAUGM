@@ -20,7 +20,8 @@ Workflow de la inversión de forma de onda completa para un medio elástico usan
 
 
 ### Cómo correr el ejemplo?
-    python inversion.py
+    $ git clone https://github.com/armandoespindola/CursoRAUGM.git
+    $ python inversion.py
 
 armando.espindolacarmona@kaust.edu.sa
 
